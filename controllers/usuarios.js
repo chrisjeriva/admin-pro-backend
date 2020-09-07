@@ -5,13 +5,21 @@ const Usuario = require('../models/usuario');
 const { generateJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
+    const page = Number(req.query.page) || 0;
+    const rows = Number(req.query.rows) || 10;
 
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    const [usuarios, total] = await Promise.all([
+        Usuario.find({}, 'nombre email role google')
+                .skip(page)
+                .limit(rows),
+
+        Usuario.countDocuments()
+    ]);
 
     res.json({
         ok: true,
         usuarios,
-        uid: req.uid
+        total
     });
 
 };
