@@ -2,10 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
-const actualizarArchivo = require('../helpers/actualizar-archivo');
+const {actualizarArchivo} = require('../helpers/actualizar-archivo');
 
 const fileUpload = (req, res = response) => {
-
     const tipo = req.params.tipo;
     const id = req.params.id;
     const tiposValidos = ['hospitales', 'medicos', 'usuarios'];

@@ -11,6 +11,6 @@ const router = new Router();
 router.use(exprFileUpload());
 
 router.put('/:tipo/:id', validarJWT, fileUpload);
-router.put('/:tipo/:archivo', retornarArchivo);
+router.get('/:tipo/:archivo', retornarArchivo);
 
 module.exports = router;
